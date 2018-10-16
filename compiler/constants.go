@@ -1,14 +1,18 @@
 package compiler
 
+import "regexp"
+
 var (
-	StopWords = []string{"\n", "\r", "\t"}
+	stopWords = []string{"\n", "\r", "\t", " "}
+	floatReg  = regexp.MustCompile("(^[\\d]+\\.[\\d]+)")
+	intReg    = regexp.MustCompile("(^[\\d]+)")
 )
 
 const (
-	ExprStart = "("
-	ExprEnd   = ")"
-	Plus      = "+"
-	Minus     = "-"
-	Multiply  = "*"
-	Divide    = "/"
+	exprStart = "("
+	exprEnd   = ")"
+	plus      = "+"
+	minus     = "-"
+	multiply  = "*"
+	divide    = "/"
 )
