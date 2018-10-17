@@ -46,7 +46,9 @@ func shell() {
 		if expr == "quit" || expr == "exit" {
 			break
 		}
-		log.Print(expr)
+		byteCode := compiler.Build([]byte(expr))
+		result := vm.Run(byteCode)
+		fmt.Println(result)
 	}
 }
 
