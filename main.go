@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/ritterhou/yui/common"
 	"github.com/ritterhou/yui/compiler"
+	"github.com/ritterhou/yui/vm"
 	"github.com/ritterhou/yui/ylog"
 	"log"
 	"os"
@@ -25,7 +26,13 @@ func build(filename string) {
 // 运行编译文件或源代码文件
 func run(filename string) {
 	filename = common.GetAbsPath(filename)
-	log.Println("run " + filename)
+	data := common.ReadFile(filename)
+	// 如果输入的是源文件，则需要先对源文件进行编译
+	if !common.IsCompiled(data) {
+		data = compiler.Build(data)
+	}
+	result := vm.Run(data)
+	fmt.Println(result)
 }
 
 // 进入交互式的shell
