@@ -5,14 +5,10 @@ import (
 	"log"
 	"os"
 	"path"
-	"strconv"
 )
 
-const magicHex = 0x10151657 // 10月15日 16时57分
-
 var (
-	root  string // 当前的工作目录
-	Magic []byte // Magic Number
+	root string // 当前的工作目录
 )
 
 func init() {
@@ -21,8 +17,6 @@ func init() {
 		log.Fatal(err)
 	}
 	root = dir
-
-	Magic = []byte(strconv.FormatInt(magicHex, 2))
 }
 
 func GetAbsPath(filename string) (absPath string) {
@@ -41,15 +35,3 @@ func ReadFile(filePath string) []byte {
 func WriteFile(filePath string, data []byte) {
 	ioutil.WriteFile(filePath, data, 0644)
 }
-
-//func IsCompiled(data []byte) bool {
-//	if len(data) < 4 {
-//		return false
-//	}
-//	for i := 0; i < 4; i++ {
-//		if data[i] != Magic[i] {
-//			return false
-//		}
-//	}
-//	return true
-//}

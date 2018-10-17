@@ -2,6 +2,7 @@ package compiler
 
 import (
 	"fmt"
+	"github.com/ritterhou/yui/common"
 	"log"
 )
 
@@ -22,16 +23,8 @@ func prettyPrint(ast *node) {
 	prettyPrint(ast, "├──")
 }
 
-const (
-	PUSH     = "PUSH"
-	PLUS     = "PLUS"
-	MINUS    = "MINUS"
-	MULTIPLY = "MULTIPLY"
-	DIVIDE   = "DIVIDE"
-)
-
 type instruct struct {
-	op    string // 操作类型
+	op    byte // 操作类型
 	value string
 }
 
@@ -49,7 +42,7 @@ func traverse(node1 *node) {
 	value := node1.value
 	// 叶子节点保存数据
 	if left == nil && right == nil {
-		ins := instruct{op: PUSH, value: value}
+		ins := instruct{op: common.PUSH, value: value}
 		addIns(ins)
 		return
 	}
@@ -59,27 +52,21 @@ func traverse(node1 *node) {
 	// 内部节点保存了操作符
 	switch value {
 	case plus:
-		addIns(instruct{op: PLUS})
+		addIns(instruct{op: common.PLUS})
 	case minus:
-		addIns(instruct{op: MINUS})
+		addIns(instruct{op: common.MINUS})
 	case multiply:
-		addIns(instruct{op: MULTIPLY})
+		addIns(instruct{op: common.MULTIPLY})
 	case divide:
-		addIns(instruct{op: DIVIDE})
+		addIns(instruct{op: common.DIVIDE})
 	default:
 		log.Fatalf("unkonwn node %s", value)
 	}
 }
 
-// 将指令转化为二进制的字节码
-//func serialize() []byte {
-//
-//}
-
 // 语义分析
-func analysis(ast *node) []byte {
+func analysis(ast *node) []instruct {
 	instructions = make([]instruct, 0, 10)
 	traverse(ast)
-	log.Println(instructions)
-	return make([]byte, 0, 0)
+	return instructions
 }
