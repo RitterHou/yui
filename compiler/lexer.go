@@ -5,20 +5,22 @@ import (
 	"strings"
 )
 
-type node struct {
-	parent   *node
-	children []*node
-	value    string
-}
-
-func Build(source []byte) (target []byte) {
-	tokens := lexer(string(source))
-	parser(tokens)
+// 移除注释行
+func removeComments(source string) string {
+	lines := strings.Split(source, "\n")
+	lines1 := make([]string, 0, len(lines))
+	for _, line := range lines {
+		if !strings.HasPrefix(line, "//") {
+			lines1 = append(lines1, line)
+		}
+	}
+	source = strings.Join(lines1, "\n")
 	return source
 }
 
 // 词法分析
-func lexer(source string) []string {
+func listTokens(source string) []string {
+	source = removeComments(source)
 	for _, word := range stopWords {
 		source = strings.Replace(source, word, "", -1)
 	}
@@ -53,40 +55,4 @@ func lexer(source string) []string {
 	}
 	tokens = append(tokens, exprEnd)
 	return tokens
-}
-
-// 语法分析
-func parser(tokens []string) *node {
-	// 给父节点增加一个子节点
-	addChild := func(parent *node, child *node) {
-		children := parent.children
-		children = append(children, child)
-		parent.children = children
-	}
-	root := new(node)
-	parent := new(node)
-
-	for _, token := range tokens {
-		log.Println(token)
-		newNode := &node{value: token}
-		if root.value == "" {
-			root = newNode
-		} else {
-			addChild(parent, newNode)
-		}
-
-		switch token {
-		case exprStart:
-			parent = newNode
-		case exprEnd:
-			parent = parent.parent
-		case plus:
-		case minus:
-		case multiply:
-		case divide:
-		default:
-
-		}
-	}
-	return root
 }
