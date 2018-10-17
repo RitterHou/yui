@@ -50,6 +50,19 @@ func shell() {
 	}
 }
 
+// 反编译字节码并生成指令
+func decompile(filename string) {
+	filename = common.GetAbsPath(filename)
+	data := common.ReadFile(filename)
+	if !common.IsCompiled(data) {
+		log.Fatal("error data format: not yuicode file")
+	}
+	instructions := compiler.Decompile(data)
+	for _, ins := range instructions {
+		fmt.Println(ins)
+	}
+}
+
 func main() {
 	// 从参数中获取文件名
 	getFilename := func(args []string) (string, bool) {
@@ -83,6 +96,12 @@ func main() {
 		}
 	case "shell":
 		shell()
+	case "dec":
+		if filename, exist := getFilename(args); exist {
+			decompile(filename)
+		} else {
+			fmt.Println("decompile: no input file")
+		}
 	default:
 		fmt.Printf("unknown command \"%s\"\n", command)
 	}

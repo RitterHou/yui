@@ -6,13 +6,14 @@ const (
 
 Usage:
 
-	yui command [arguments]
+    yui command [arguments]
 
 The commands are:
 
-	build   build the source file
-	run     run compiled file or source file
-	shell   open interactive shell
+    build   build the source file
+    run     run compiled file or source file
+    shell   open interactive shell
+    dec     decompile binary code to instructions
 
 `
 	FileExtension = ".yuicode"
