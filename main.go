@@ -37,12 +37,16 @@ func run(filename string) {
 
 // 进入交互式的shell
 func shell() {
+	stopWords := []string{"\n", "\r"}
+
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Yui shell " + common.Version)
 	for {
-		fmt.Print("> ")
+		fmt.Print(">>> ")
 		expr, _ := reader.ReadString('\n')
-		expr = strings.Trim(expr, "\n")
+		for _, word := range stopWords {
+			expr = strings.Replace(expr, word, "", -1)
+		}
 		if expr == "quit" || expr == "exit" {
 			break
 		}
