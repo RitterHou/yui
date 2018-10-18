@@ -7,15 +7,10 @@ import (
 
 // 移除注释行
 func removeComments(source string) string {
-	lines := strings.Split(source, "\n")
-	lines1 := make([]string, 0, len(lines))
-	for _, line := range lines {
-		if !strings.HasPrefix(line, "//") {
-			lines1 = append(lines1, line)
-		}
+	if !strings.HasSuffix(source, "\n") {
+		source += "\n"
 	}
-	source = strings.Join(lines1, "\n")
-	return source
+	return commentReg.ReplaceAllString(source, "")
 }
 
 // 词法分析
