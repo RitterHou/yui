@@ -1,8 +1,7 @@
 package common
 
 const (
-	Version = "0.0.1"
-	Help    = `Yui version ` + Version + `, https://github.com/RitterHou/yui
+	Help = `Yui version ` + Version + `, https://github.com/RitterHou/yui
 
 Usage:
 
