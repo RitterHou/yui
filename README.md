@@ -31,3 +31,8 @@ _用go语言实现四则运算_
 
     ./yui shell
 
+如果你已经安装了rlwrap，那么你可以使用命令
+
+    rlwrap ./yui shell
+
+在输入表达式时进行括号匹配
