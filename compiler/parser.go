@@ -19,6 +19,14 @@ func factor() *node {
 		expression := expr()
 		index++ // 移除最后的右括号
 		return expression
+	case plus:
+		value := tokens[index]
+		index++
+		return &node{value: value}
+	case minus:
+		value := minus + tokens[index]
+		index++
+		return &node{value: value}
 	default:
 		return &node{value: token}
 	}

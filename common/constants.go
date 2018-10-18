@@ -34,5 +34,5 @@ var (
 )
 
 func init() {
-	Magic = Int2ByteArray(uint32(magicHex))
+	Magic = Int2ByteArray(int32(magicHex))
 }

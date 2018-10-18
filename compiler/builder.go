@@ -16,7 +16,7 @@ func serialize(instructions []instruct) []byte {
 			// 整数
 			if num, err := strconv.Atoi(value); err == nil {
 				byteCode = append(byteCode, common.INT)
-				buf := common.Int2ByteArray(uint32(num))
+				buf := common.Int2ByteArray(int32(num))
 				byteCode = append(byteCode, buf...)
 				continue
 			}
