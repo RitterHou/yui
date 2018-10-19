@@ -10,6 +10,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 )
 
 // 编译源代码文件
@@ -37,9 +38,19 @@ func run(filename string) {
 	}
 }
 
+var order uint32
+
+func getOrderAndTime() string {
+	t := time.Now()
+	now := t.Format("2006-01-02 15:04:05")
+	order++
+	return fmt.Sprintf(" %d  %s  ", order, now)
+}
+
 // 进入交互式的shell
 func shell() {
 	stopWords := []string{"\n", "\r"}
+	histories := make([]string, 0)
 
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Yui shell " + common.Version)
@@ -52,6 +63,14 @@ func shell() {
 		if expr == "quit" || expr == "exit" {
 			break
 		}
+		if expr == "history" {
+			for _, history := range histories {
+				fmt.Println(history)
+			}
+			continue
+		}
+		histories = append(histories, getOrderAndTime()+expr)
+
 		byteCode := compiler.Build([]byte(expr))
 		result, err := vm.Run(byteCode)
 		if err == nil {
