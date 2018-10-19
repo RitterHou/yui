@@ -34,10 +34,18 @@ func serialize(instructions []instruct) []byte {
 }
 
 func Build(input []byte) []byte {
-	source := string(input)
+	// 预处理
+	source := preProcess(string(input))
+	if source == "" {
+		// 没有任何指令则只返回一个头部
+		return common.Magic
+	}
 
+	// 词法分析
 	tokens := listTokens(source)
+	// 语法分析
 	ast := parse(tokens)
+	// 语义分析
 	ir := analysis(ast)
 
 	return serialize(ir)

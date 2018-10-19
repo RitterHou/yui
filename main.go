@@ -31,8 +31,10 @@ func run(filename string) {
 	if !common.IsCompiled(data) {
 		data = compiler.Build(data)
 	}
-	result := vm.Run(data)
-	fmt.Println(result)
+	result, err := vm.Run(data)
+	if err == nil {
+		fmt.Println(result)
+	}
 }
 
 // 进入交互式的shell
@@ -51,8 +53,10 @@ func shell() {
 			break
 		}
 		byteCode := compiler.Build([]byte(expr))
-		result := vm.Run(byteCode)
-		fmt.Println(result)
+		result, err := vm.Run(byteCode)
+		if err == nil {
+			fmt.Println(result)
+		}
 	}
 }
 

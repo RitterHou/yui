@@ -2,24 +2,10 @@ package compiler
 
 import (
 	"log"
-	"strings"
 )
-
-// 移除注释行
-func removeComments(source string) string {
-	if !strings.HasSuffix(source, "\n") {
-		source += "\n"
-	}
-	return commentReg.ReplaceAllString(source, "")
-}
 
 // 词法分析
 func listTokens(source string) []string {
-	source = removeComments(source)
-	for _, word := range stopWords {
-		source = strings.Replace(source, word, "", -1)
-	}
-
 	length := len(source)
 	tokens := make([]string, 0, length+2)
 	tokens = append(tokens, exprStart)

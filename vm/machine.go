@@ -1,6 +1,7 @@
 package vm
 
 import (
+	"errors"
 	"github.com/ritterhou/yui/common"
 )
 
@@ -38,8 +39,11 @@ func getInstructs(input []byte) []instruct {
 	return ins
 }
 
-func Run(input []byte) float32 {
+func Run(input []byte) (float32, error) {
 	instructs := getInstructs(input)
+	if len(instructs) == 0 {
+		return 0, errors.New("no instructions run")
+	}
 	s := newStack()
 	for _, ins := range instructs {
 		switch ins.op {
@@ -63,5 +67,5 @@ func Run(input []byte) float32 {
 			s.push(v2 / v1)
 		}
 	}
-	return s.pop()
+	return s.pop(), nil
 }
