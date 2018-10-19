@@ -7,6 +7,7 @@ var (
 	floatReg   = regexp.MustCompile("(^[\\d]+\\.[\\d]+)")
 	intReg     = regexp.MustCompile("(^[\\d]+)")
 	commentReg = regexp.MustCompile("(//.*\n)")
+	exprReg    = regexp.MustCompile("{([\\d\\D]+?)}")
 	defineReg  = regexp.MustCompile(
 		"(define +([A-Za-z_][A-Za-z0-9_]*) +([\\d]+\\.[\\d]+|[\\d]+))")
 )

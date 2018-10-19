@@ -20,11 +20,12 @@ func TestBuildAndRun(t *testing.T) {
 
 		`define _ 666`,
 
-		`_ + 334`}
+		`_ + 334`,
+		`{_ + 334} {age} {name + age + salary}`}
 	for _, source := range sources {
 		byteCode := compiler.Build([]byte(source))
-		result, err := vm.Run(byteCode)
-		if err == nil {
+		results := vm.Run(byteCode)
+		for _, result := range results {
 			t.Log(result)
 		}
 	}

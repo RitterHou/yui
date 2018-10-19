@@ -17,6 +17,9 @@ The commands are:
 `
 	FileExtension = ".yuicode"
 	magicHex      = 0x10151657 // 10月15日 16时57分
+
+	Begin = "BEGIN"
+	End   = "END"
 )
 
 var (

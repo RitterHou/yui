@@ -1,6 +1,8 @@
 package compiler
 
-import "strings"
+import (
+	"strings"
+)
 
 // 保存定义的变量
 var variables = make(map[string]string)
@@ -22,7 +24,7 @@ func removeStopWords(source string) string {
 func getDefines(source string) string {
 	defines := defineReg.FindAllStringSubmatch(source, -1)
 	if defines != nil {
-		// 移除定义
+		// 移除源代码中的定义代码
 		source = defineReg.ReplaceAllString(source, "")
 	}
 	for _, define := range defines {
@@ -40,11 +42,31 @@ func setDefines(source string) string {
 	return source
 }
 
+func splitExpressions(source string) []string {
+	// 没有任何表达式
+	if source == "" {
+		return []string{}
+	}
+
+	results := exprReg.FindAllStringSubmatch(source, -1)
+	if results == nil {
+		// 没能解析出结果则认为只有一个表达式
+		return []string{source}
+	}
+
+	expressions := make([]string, 0)
+	for _, result := range results {
+		expressions = append(expressions, result[1])
+	}
+	return expressions
+}
+
 // 预处理
-func preProcess(source string) string {
+func preProcess(source string) []string {
 	source = removeComments(source)
 	source = getDefines(source)
 	source = setDefines(source)
 	source = removeStopWords(source)
-	return source
+	expressions := splitExpressions(source)
+	return expressions
 }

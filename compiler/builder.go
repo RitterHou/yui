@@ -8,7 +8,7 @@ import (
 
 // 将指令序列化为二进制的字节码
 func serialize(instructions []instruct) []byte {
-	byteCode := common.Magic
+	byteCode := make([]byte, 0)
 	for _, ins := range instructions {
 		byteCode = append(byteCode, ins.op)
 		value := ins.value
@@ -34,19 +34,24 @@ func serialize(instructions []instruct) []byte {
 }
 
 func Build(input []byte) []byte {
-	// 预处理
-	source := preProcess(string(input))
-	if source == "" {
-		// 没有任何指令则只返回一个头部
-		return common.Magic
+	byteCodes := common.Magic
+	appendByteCodes := func(byteCode []byte) {
+		byteCodes = append(byteCodes, common.Int2ByteArray(int32(len(byteCode)))...)
+		byteCodes = append(byteCodes, byteCode...)
 	}
 
-	// 词法分析
-	tokens := listTokens(source)
-	// 语法分析
-	ast := parse(tokens)
-	// 语义分析
-	ir := analysis(ast)
+	// 预处理
+	sources := preProcess(string(input))
+	// 每一个source对应着一个计算表达式
+	for _, source := range sources {
+		// 词法分析
+		tokens := listTokens(source)
+		// 语法分析
+		ast := parse(tokens)
+		// 语义分析
+		ir := analysis(ast)
 
-	return serialize(ir)
+		appendByteCodes(serialize(ir))
+	}
+	return byteCodes
 }

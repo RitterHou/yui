@@ -32,8 +32,8 @@ func run(filename string) {
 	if !common.IsCompiled(data) {
 		data = compiler.Build(data)
 	}
-	result, err := vm.Run(data)
-	if err == nil {
+	results := vm.Run(data)
+	for _, result := range results {
 		fmt.Println(result)
 	}
 }
@@ -72,8 +72,8 @@ func shell() {
 		histories = append(histories, getOrderAndTime()+expr)
 
 		byteCode := compiler.Build([]byte(expr))
-		result, err := vm.Run(byteCode)
-		if err == nil {
+		results := vm.Run(byteCode)
+		for _, result := range results {
 			fmt.Println(result)
 		}
 	}
@@ -88,6 +88,9 @@ func decompile(filename string) {
 	}
 	instructions := compiler.Decompile(data)
 	for _, ins := range instructions {
+		if !(ins == common.Begin || ins == common.End) {
+			fmt.Print("  ")
+		}
 		fmt.Println(ins)
 	}
 }
