@@ -28,8 +28,10 @@ _用go语言实现四则运算_
 
     ./yui shell
 
-如果你已经安装了rlwrap，那么你可以使用命令
+如果你已经安装了 rlwrap，那么你可以使用 rlwrap 在输入表达式时进行括号匹配
 
     rlwrap ./yui shell
 
-在输入表达式时进行括号匹配
+下面是 shell 的演示操作
+
+[![asciicast](https://asciinema.org/a/K4deAJjyqxECZmpjJOR2rorEt.png)](https://asciinema.org/a/K4deAJjyqxECZmpjJOR2rorEt)
