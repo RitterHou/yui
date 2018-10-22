@@ -27,7 +27,7 @@ func serialize(instructions []instruct) []byte {
 				byteCode = append(byteCode, buf...)
 				continue
 			}
-			log.Fatalf("value %s is not num", value)
+			log.Panicf("value %s is not num", value)
 		}
 	}
 	return byteCode

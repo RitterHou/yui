@@ -60,7 +60,7 @@ func traverse(node1 *node) {
 	case divide:
 		addIns(instruct{op: common.DIVIDE})
 	default:
-		log.Fatalf("unkonwn node %s", value)
+		log.Panicf("unkonwn node %s", value)
 	}
 }
 

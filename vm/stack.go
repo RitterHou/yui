@@ -22,7 +22,7 @@ func (s *stack) pop() float32 {
 	value := s.value
 	length := len(value)
 	if length == 0 {
-		log.Fatal("stack value is nil, can't pop anything")
+		log.Panicf("stack value is nil, can't pop anything")
 	}
 	top := value[length-1]
 	s.value = value[:length-1]

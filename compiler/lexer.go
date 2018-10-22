@@ -27,7 +27,7 @@ func listTokens(source string) []string {
 				if len(intParam) > 0 {
 					word = intParam[0]
 				} else {
-					log.Fatalf("invalid word \"%s\"", word)
+					log.Panicf("invalid word \"%s\"", word)
 				}
 			}
 		}

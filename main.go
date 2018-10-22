@@ -1,16 +1,13 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"github.com/ritterhou/yui/common"
 	"github.com/ritterhou/yui/compiler"
 	"github.com/ritterhou/yui/vm"
-	"github.com/ritterhou/yui/ylog"
 	"log"
 	"os"
 	"strings"
-	"time"
 )
 
 // 编译源代码文件
@@ -38,47 +35,6 @@ func run(filename string) {
 	}
 }
 
-var order uint32
-
-func getOrderAndTime() string {
-	t := time.Now()
-	now := t.Format("2006-01-02 15:04:05")
-	order++
-	return fmt.Sprintf(" %2d  %s  ", order, now)
-}
-
-// 进入交互式的shell
-func shell() {
-	stopWords := []string{"\n", "\r"}
-	histories := make([]string, 0)
-
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Println("Yui shell " + common.Version)
-	for {
-		fmt.Print(">>> ")
-		expr, _ := reader.ReadString('\n')
-		for _, word := range stopWords {
-			expr = strings.Replace(expr, word, "", -1)
-		}
-		if expr == "quit" || expr == "exit" {
-			break
-		}
-		if expr == "history" {
-			for _, history := range histories {
-				fmt.Println(history)
-			}
-			continue
-		}
-		histories = append(histories, getOrderAndTime()+expr)
-
-		byteCode := compiler.Build([]byte(expr))
-		results := vm.Run(byteCode)
-		for _, result := range results {
-			fmt.Println(result)
-		}
-	}
-}
-
 // 反编译字节码并生成指令
 func decompile(filename string) {
 	filename = common.GetAbsPath(filename)
@@ -103,8 +59,6 @@ func main() {
 		}
 		return args[2], true
 	}
-
-	ylog.Init()
 
 	args := os.Args
 	if len(args) == 1 { // 没有参数
