@@ -3,9 +3,7 @@ _用go语言实现四则运算_
 
 ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)
 
-下载源代码并编译或者在Release页面直接[下载](https://github.com/RitterHou/yui/releases)已经编译好的文件
-
-获取测试文件 [yui.test](https://raw.githubusercontent.com/RitterHou/yui/master/yui.test)
+下载源代码并编译或者在Release页面直接[下载](https://github.com/RitterHou/yui/releases)已经编译好的文件，获取测试文件 [yui.test](https://raw.githubusercontent.com/RitterHou/yui/master/yui.test)
 
 打印帮助文档：
 
@@ -35,3 +33,5 @@ _用go语言实现四则运算_
 下面是 shell 的演示操作
 
 [![asciicast](https://asciinema.org/a/K4deAJjyqxECZmpjJOR2rorEt.png)](https://asciinema.org/a/K4deAJjyqxECZmpjJOR2rorEt)
+
+[> 更多详细信息](https://www.nosuchfield.com/2018/10/22/Implementing-four-arithmetic-operations-with-golang/)
