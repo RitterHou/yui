@@ -3,7 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/ritterhou/totoro/common"
+	"github.com/ritterhou/yui/common"
 	"github.com/ritterhou/yui/compiler"
 	"github.com/ritterhou/yui/vm"
 	"os"

@@ -1,0 +1,18 @@
+// define用于设置常量，在预处理阶段define会被替换掉
+define pi 3.1415926      // π
+define radius 10         // 半径
+
+define salary 28451.82
+define age 18
+
+{
+    (radius * radius) * pi
+}
+
+{
+    (age * 200) + salary
+}
+
+{
+    (1 + 2 + 88) * 100000 + 18722 / (-2) + 888 * (8848 - 19087) // 计算结果 -1593
+}
