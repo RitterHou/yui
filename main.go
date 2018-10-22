@@ -44,7 +44,7 @@ func getOrderAndTime() string {
 	t := time.Now()
 	now := t.Format("2006-01-02 15:04:05")
 	order++
-	return fmt.Sprintf(" %d  %s  ", order, now)
+	return fmt.Sprintf(" %2d  %s  ", order, now)
 }
 
 // 进入交互式的shell
