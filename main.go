@@ -60,6 +60,12 @@ func main() {
 		return args[2], true
 	}
 
+	// 程序异常退出
+	exit := func(msg string) {
+		fmt.Println(msg)
+		os.Exit(1)
+	}
+
 	args := os.Args
 	if len(args) == 1 { // 没有参数
 		fmt.Print(common.Help)
@@ -72,13 +78,13 @@ func main() {
 		if filename, exist := getFilename(args); exist {
 			build(filename)
 		} else {
-			fmt.Println("build: no input file")
+			exit("build: no input file")
 		}
 	case "run":
 		if filename, exist := getFilename(args); exist {
 			run(filename)
 		} else {
-			fmt.Println("run: no input file")
+			exit("run: no input file")
 		}
 	case "shell":
 		shell()
@@ -86,10 +92,10 @@ func main() {
 		if filename, exist := getFilename(args); exist {
 			decompile(filename)
 		} else {
-			fmt.Println("decompile: no input file")
+			exit("decompile: no input file")
 		}
 	default:
-		fmt.Printf("unknown command \"%s\"\n", command)
+		exit(fmt.Sprintf("unknown command \"%s\"", command))
 	}
 
 }

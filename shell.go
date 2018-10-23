@@ -7,6 +7,7 @@ import (
 	"github.com/ritterhou/yui/compiler"
 	"github.com/ritterhou/yui/vm"
 	"os"
+	"os/signal"
 	"strings"
 	"time"
 )
@@ -17,6 +18,7 @@ var histories = make([]string, 0)
 var reader = bufio.NewReader(os.Stdin)
 var order uint32
 
+// 获取当前的序号和时间
 func getOrderAndTime() string {
 	t := time.Now()
 	now := t.Format("2006-01-02 15:04:05")
@@ -24,6 +26,7 @@ func getOrderAndTime() string {
 	return fmt.Sprintf(" %2d  %s  ", order, now)
 }
 
+// 从标准输入获取命令并执行
 func command() {
 	defer func() {
 		if err := recover(); err != nil {
@@ -55,8 +58,21 @@ func command() {
 	}
 }
 
+// 屏蔽 Ctrl-C
+func warn() {
+	go func() {
+		for {
+			c := make(chan os.Signal, 1)
+			signal.Notify(c, os.Interrupt)
+			<-c
+			fmt.Print("\nKeyboardInterrupt\n>>> ")
+		}
+	}()
+}
+
 // 进入交互式的shell
 func shell() {
+	warn()
 	fmt.Println(desc)
 	for {
 		command()
