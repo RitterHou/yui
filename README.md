@@ -3,13 +3,20 @@ _用go语言实现四则运算_
 
 ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)
 
-下载源代码并编译或者在Release页面直接[下载](https://github.com/RitterHou/yui/releases)已经编译好的文件，获取测试文件 [yui.test](https://raw.githubusercontent.com/RitterHou/yui/master/yui.test)
+### 安装
+在 Mac 上可以通过 homebrew 进行安装
+
+    brew tap ritterhou/tap && brew install yui
+
+其它平台需要下载源代码并编译或者在Release页面直接[下载](https://github.com/RitterHou/yui/releases)已经编译好的文件
+
+### 使用
 
 打印帮助文档：
 
     ./yui
   
-编译源代码
+编译源代码（获取测试文件 [yui.test](https://raw.githubusercontent.com/RitterHou/yui/master/yui.test)）
 
     ./yui build yui.test
    
