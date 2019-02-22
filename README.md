@@ -37,8 +37,4 @@ _用go语言实现四则运算_
 
     rlwrap ./yui shell
 
-下面是 shell 的演示操作
-
-[![asciicast](https://asciinema.org/a/K4deAJjyqxECZmpjJOR2rorEt.png)](https://asciinema.org/a/K4deAJjyqxECZmpjJOR2rorEt)
-
-[> 更多详细信息](https://www.nosuchfield.com/2018/10/22/Implementing-four-arithmetic-operations-with-golang/)
+[> 视频演示](https://www.bilibili.com/video/av34478667)
